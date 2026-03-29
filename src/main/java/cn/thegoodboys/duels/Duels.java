@@ -2,6 +2,7 @@ package cn.thegoodboys.duels;
 
 import cn.thegoodboys.duels.arena.Arena;
 import cn.thegoodboys.duels.commands.AdminCommands;
+import cn.thegoodboys.duels.listener.PlayerListener;
 import cn.thegoodboys.duels.listener.ScoreBoard;
 import cn.thegoodboys.duels.type.DEBUFF;
 import cn.thegoodboys.duels.type.MegaWalls;
@@ -48,6 +49,7 @@ public final class Duels extends JavaPlugin {
                 }
             }
             Bukkit.getPluginManager().registerEvents(new ScoreBoard(),this);
+            Bukkit.getPluginManager().registerEvents(new PlayerListener(),this);
         }
     }
 

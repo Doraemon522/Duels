@@ -2,6 +2,7 @@ package cn.thegoodboys.duels.listener;
 
 import cn.thegoodboys.duels.Duels;
 import cn.thegoodboys.duels.arena.Arena;
+import cn.thegoodboys.duels.arena.ArenaMode;
 import cn.thegoodboys.utils.util.Utils;
 import cn.thegoodboys.utils.util.chat.CC;
 import cn.thegoodboys.utils.util.chat.scoreboard.FastBoard;
@@ -43,7 +44,7 @@ public class ScoreBoard implements Listener {
             list.add("§f硬币: §6N/A");
             list.add("");
             list.add("§f赛季段位: §7NULL");
-        } else {
+        } else if (Arena.arenaMode.get(Arena.arenaMap.get(player)) == ArenaMode.DEBUFF) {
             String playerArena = Arena.arenaMap.get(player);
             if (playerArena != null && Arena.arenaPlayers.containsKey(playerArena)) {
                 List<Player> players = Arena.arenaPlayers.get(playerArena);
@@ -62,12 +63,24 @@ public class ScoreBoard implements Listener {
                     list.add("§f对手: §a" + opponentName);
                     list.add("");
                     list.add("§f游戏模式: §a" + Arena.arenaMode.get(playerArena));
+                    list.add("§f模式: §a" + Arena.arenaGameMode.get(playerArena).getDisPlayName());
                     list.add("");
                     list.add("§f当前地图: §a" + playerArena);
                 }
             }
+        }else {
+            list.add("");
+            list.add("§e/duel <玩家名>");
+            list.add("§e对一个玩家发起单挑");
+            list.add("");
+            list.add("§f总击杀: §aN/A");
+            list.add("§f总死亡: §cN/A");
+            list.add("§fK/D: §d1.00");
+            list.add("");
+            list.add("§f硬币: §6N/A");
+            list.add("");
+            list.add("§f赛季段位: §7NULL");
         }
-
         list.add("");
         list.add("§eIP: Mc.Mc233.Com.cn");
         list = CC.translate(list);

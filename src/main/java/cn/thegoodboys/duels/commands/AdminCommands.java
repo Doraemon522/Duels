@@ -3,6 +3,7 @@ package cn.thegoodboys.duels.commands;
 import cn.thegoodboys.duels.Duels;
 import cn.thegoodboys.duels.arena.Arena;
 import cn.thegoodboys.duels.arena.ArenaMode;
+import cn.thegoodboys.duels.arena.Mode;
 import cn.thegoodboys.utils.util.chat.CC;
 import cn.thegoodboys.utils.util.config.FileConfig;
 import org.bukkit.command.Command;
@@ -82,11 +83,25 @@ public class AdminCommands extends Command {
                     CC.send(p,"&a成功设置竞技场模式！");
                 }
             }
+            if (strings[0].equalsIgnoreCase("setarenamode")) {
+                if (strings.length == 2) {
+                    Mode arenaMode;
+                    try {
+                        arenaMode = Mode.valueOf(strings[1].toUpperCase());
+                    }catch (IllegalArgumentException e){
+                        CC.send(p, "&c无效的模式参数");
+                        return false;
+                    }
+                    gameConfig.set("ArenaMode",arenaMode.name());
+                    gameConfig.save();
+                    CC.send(p,"&a成功设置竞技场模式！");
+                }
+            }
             if (strings[0].equalsIgnoreCase("join")) {
                 if (strings.length == 2) {
                     String mapName = strings[1];
                     FileConfig gameConfig = new FileConfig(Duels.getInstance(), mapName + ".yml");
-                    if (gameConfig.getString("Mode") == null ||gameConfig.getLocation("Lobby") == null || gameConfig.getLocation("Spawn1") == null || gameConfig.getLocation("Spawn2") == null) {
+                    if (gameConfig.getString("ArenaMode") == null || gameConfig.getString("Mode") == null ||gameConfig.getLocation("Lobby") == null || gameConfig.getLocation("Spawn1") == null || gameConfig.getLocation("Spawn2") == null) {
                         CC.send(p, "§c地图配置不完整！");
                         return false;
                     }
