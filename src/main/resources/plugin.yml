@@ -1,0 +1,6 @@
+name: Duels
+version: '${version}'
+main: cn.thegoodboys.duels.Duels
+author: TheGoodBoys
+depend:
+  - 233Utils
